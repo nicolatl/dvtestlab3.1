@@ -63,18 +63,8 @@ img {
   gap: 1em;
 }
 
-.projects article {
-  display: grid;
-  grid-template-rows: subgrid;
-  grid-row: span 3;
-}
-
-.projects h2 {
-  margin: 0;
-}
-
 h1 {
-  font-size: 400%;
+  font-size: 240%;
 }
 
 h1, h2, h3, h4, h5, h6 {
