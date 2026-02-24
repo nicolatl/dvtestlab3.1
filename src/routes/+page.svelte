@@ -6,13 +6,6 @@
 </script>
 
 <h1>Nicola</h1>
-<nav>
-    <a class="current" href=".">Home</a>
-    <a href="projects">Projects</a>
-    <a href="contact">Contact</a>
-    <a href="resume">Resume</a>
-    <a href="https://github.com/nicolatl" target="_blank">GitHub</a>
-</nav>
 
 <div class="top-matter">
     <div class="about">
