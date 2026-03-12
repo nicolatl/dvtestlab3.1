@@ -1,62 +1,86 @@
 [
     {
-        "title": "Lorem ipsum dolor sit.",
+        "title": "The Birth of Orpheus",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. At id veniam officiis, consequatur ipsum ea ex explicabo, velit quaerat necessitatibus numquam iste sunt quidem error ut laboriosam. Praesentium, maiores ea?"
+        "year": 1,
+        "description": "Orpheus, son of the muse Calliope, is born with a gift for music that moves the very world around him.",
+        "story": "From his first breath, Orpheus hummed melodies that made the river slow and the birds circle overhead. His mother placed a lyre in his hands before he could walk. The gods themselves leaned in to listen."
     },
     {
-        "title": "Dolorum illum incidunt necessitatibus.",
+        "title": "The Lyre of Apollo",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Voluptates, quas. Tenetur tempore nisi, non commodi natus impedit, ex, perferendis officiis porro illum repellendus rerum modi dolore itaque. Magnam omnis aperiam, quae ipsa sunt obcaecati consectetur voluptates est recusandae!"
+        "year": 2,
+        "description": "Apollo gifts Orpheus a golden lyre, and his music becomes a force that bends nature itself.",
+        "story": "With Apollo's lyre, Orpheus could coax trees to uproot and follow him down mountain paths. Rivers reversed their courses at a single chord. Even the stones wept when he played in a minor key."
     },
     {
-        "title": "Ea delectus reiciendis ab?",
+        "title": "The World Meets Eurydice",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Iusto enim dolores ut rerum beatae voluptatem inventore voluptatibus aliquid esse, architecto officiis possimus voluptas impedit fugit odio rem modi doloremque tenetur omnis? Error molestias obcaecati, doloremque eius minus recusandae?"
+        "year": 3,
+        "description": "Orpheus encounters Eurydice in a sunlit meadow and falls instantly, irreversibly in love.",
+        "story": "She was laughing at something when he first saw her, her dark hair catching the afternoon light. He forgot every melody he had ever known and had to invent a new one just to speak to her. She listened, then laughed again — this time at him, warmly."
     },
     {
-        "title": "Minus doloribus reiciendis beatae.",
+        "title": "A Wedding in Spring",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Eius earum assumenda magnam et sunt sequi suscipit non? Dignissimos facere earum perspiciatis quam similique labore nesciunt eaque consequatur, soluta et accusantium maxime excepturi ea quia. Aspernatur nihil voluptatem saepe?"
+        "year": 4,
+        "description": "Orpheus and Eurydice marry beneath an open sky, surrounded by music and the blessing of the gods.",
+        "story": "The wedding feast lasted three days, with Orpheus playing until his fingers bled and still refusing to stop. Even Hymen, god of marriage, attended — though witnesses later said his torch flickered and smoked, an omen no one mentioned aloud. The couple noticed nothing but each other."
     },
     {
-        "title": "Libero ea minima quidem.",
+        "title": "The Serpent in the Grass",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Incidunt voluptatibus voluptates blanditiis a fugiat, sapiente dignissimos minima soluta accusantium reprehenderit excepturi sit quasi, omnis quibusdam aperiam placeat totam velit nam laudantium? Optio illo laudantium dignissimos quos tempora neque."
+        "year": 5,
+        "description": "While fleeing an unwanted pursuit, Eurydice steps on a serpent and is killed by its bite.",
+        "story": "She had been running, laughing, calling back over her shoulder when her foot found the snake hidden in the long grass. The venom was fast and the meadow went quiet all at once. By the time Orpheus reached her, she was already cold."
     },
     {
-        "title": "Voluptas mollitia cupiditate voluptate.",
+        "title": "Grief Without Music",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Ipsum saepe aperiam ea porro! Commodi ducimus explicabo quod accusantium mollitia blanditiis ea ullam voluptatum voluptate quaerat dicta aspernatur assumenda magnam officia, dolor inventore repellendus. Possimus repellendus ea quisquam at."
+        "year": 6,
+        "description": "Orpheus is consumed by grief so profound that the natural world mourns alongside him.",
+        "story": "For forty days he did not touch the lyre. The trees shed their leaves out of season and the rivers ran silently, as if in respect. When he finally played again, the sound was so full of sorrow that the nymphs wept and the mountains cracked."
     },
     {
-        "title": "Velit voluptatum molestiae repudiandae.",
+        "title": "The Descent Begins",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Soluta, optio suscipit! Fuga quam aspernatur dolor maiores earum molestias impedit distinctio quasi iste? Tempora quos perferendis sit excepturi doloribus veritatis doloremque beatae autem sed nisi quidem, numquam, rem atque."
+        "year": 7,
+        "description": "Orpheus makes the impossible decision to enter the Underworld and petition Hades for Eurydice's return.",
+        "story": "He found the entrance at Taenarum, a cave that exhaled cold air like a sleeping giant. The shades at the threshold parted for him, drawn by the music that spilled unbidden from his fingers. He walked down into the dark, playing as he went."
     },
     {
-        "title": "Quae perspiciatis delectus numquam.",
+        "title": "Before the Throne of Hades",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Eaque alias iusto hic nemo ullam dolorum, fugit aperiam tempore ad repellat eius ipsa temporibus nisi nesciunt ratione molestiae adipisci itaque eos suscipit obcaecati? Esse inventore exercitationem quaerat? Dignissimos, corporis."
+        "year": 8,
+        "description": "Orpheus plays for Hades and Persephone, and for the first time, the Underworld weeps.",
+        "story": "The Furies covered their faces. Tantalus forgot his hunger and simply stood still. Persephone's cheeks were wet before the first verse was finished, and even Hades — stone-faced, immovable Hades — pressed his fist to his mouth and looked away. The petition was granted."
     },
     {
-        "title": "Ex reprehenderit minima ea?",
+        "title": "The Condition",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Voluptatum recusandae assumenda soluta accusantium numquam. Ullam odio cumque ex hic perferendis dolor atque cum, ipsum consequatur delectus voluptatem tenetur reprehenderit sequi nostrum corporis sunt? Corrupti nostrum voluptate praesentium voluptas."
+        "year": 9,
+        "description": "Hades agrees to release Eurydice on one condition: Orpheus must not look back until they reach the living world.",
+        "story": "The rule was simple and absolute. Eurydice would follow behind him through the dark. He would hear her footsteps — or think he did — the entire way. He was not to turn around until sunlight touched his face."
     },
     {
-        "title": "Eos architecto distinctio quidem!",
+        "title": "The Long Walk Up",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Eos laboriosam odio dolorem possimus maiores hic cupiditate quaerat ab odit ipsa soluta ratione reiciendis officia cum, facilis facere quisquam nesciunt atque non repudiandae. Recusandae harum quas nemo perferendis ut."
+        "year": 10,
+        "description": "Orpheus climbs toward the living world, Eurydice behind him, in an agony of love and doubt.",
+        "story": "The silence between them was unbearable. He played to fill it, but the echoes in the tunnel were strange and he couldn't tell if her footsteps were real or imagined. With every step upward, his certainty dissolved a little more. The light ahead grew and so did his fear."
     },
     {
-        "title": "Necessitatibus delectus voluptatem nihil?",
+        "title": "The Turn",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Doloribus eligendi explicabo in distinctio possimus, vitae minima voluptas pariatur quidem et saepe, sequi asperiores facilis maxime id mollitia non suscipit repellendus unde. Odit dolorum consectetur distinctio consequuntur reiciendis soluta."
+        "year": 11,
+        "description": "At the threshold of the upper world, Orpheus turns to look — and loses Eurydice forever.",
+        "story": "He told himself later that he saw a glimmer of light and panicked that she wasn't there. He told himself he acted out of love, not doubt. But the moment his eyes found her face, he watched it go pale and recede, her hand reaching briefly toward him before the dark took her back. She did not blame him. That was the worst part."
     },
     {
-        "title": "Dicta voluptates pariatur perspiciatis!",
+        "title": "Music at the End of the World",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Rerum quam, vitae quas incidunt, in maxime, expedita iste voluptatibus animi cupiditate quasi quo magnam ipsam eius? Perferendis excepturi quisquam aspernatur suscipit rerum, accusantium alias perspiciatis cupiditate, deleniti voluptate qui."
+        "year": 12,
+        "description": "Orpheus wanders the earth alone, his music transformed by a grief no living person can fully understand.",
+        "story": "He played for anyone who would listen and for no one at all. The songs he made in those last years were so beautiful that wild animals lay down beside him and forgot to be hungry. When he finally died, the Muses gathered his scattered lyre and placed it among the stars, where it shines still."
     }
 ]
