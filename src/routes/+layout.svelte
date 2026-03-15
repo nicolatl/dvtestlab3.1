@@ -31,7 +31,7 @@
 
 <label class="color-scheme-switch">
     Theme:
-    <select bind:value={ colorScheme }>
+    <select bind:value={ colorScheme } name="colorScheme">
         <option value="light dark">Automatic</option>
         <option value="light">Light</option>
         <option value="dark">Dark</option>
