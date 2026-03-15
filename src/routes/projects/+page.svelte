@@ -13,17 +13,6 @@
 
   let rawData = [];
 
-  let wrangled = [];
-  let totalLines = 0;
-
-  onMount(async () => {
-      rawData = await d3.json('/lab6_example.json');
-      for (let i=0; i< rawData.length; i++) {
-        totalLines += rawData[i].lines;
-      }
-      console.log(totalLines);
-  });
-
   $: barData = d3.rollups(projects, v => v.length, d => d.year)
     .map(([year, count]) => ({ label: String(year), value: count }));
   $: console.log(barData);
