@@ -8,6 +8,17 @@ let locData = [];
 let barData = [];
 let commits = [];
 
+let width = 1000, height = 600;
+let margin = {top: 10, right: 10, bottom: 30, left: 20};
+let usableArea = {
+	top: margin.top,
+	right: width - margin.right,
+	bottom: height - margin.bottom,
+	left: margin.left
+};
+usableArea.width = usableArea.right - usableArea.left;
+usableArea.height = usableArea.bottom - usableArea.top;
+
 
 onMount(async () => {
     locData = await d3.csv(`${base}/loc.csv`, row => ({
@@ -54,6 +65,39 @@ onMount(async () => {
 $: barData = d3.rollups(locData, v => v.length, d => d.type)
     .map(([type, count]) => ({ label: String(type), value: count }));
 
+// Thanks to Nathanael Jenkins for flagging this to us!
+$: minDate = d3.min(commits.map(d => d.date));
+$: maxDate = d3.max(commits.map(d => d.date));
+$: maxDatePlusOne = new Date(maxDate);
+$: maxDatePlusOne.setDate(maxDatePlusOne.getDate() + 1);
+
+$: xScale = d3.scaleTime()
+              .domain([minDate, maxDatePlusOne])
+              .range([usableArea.left, usableArea.right])
+              .nice();
+
+$: yScale = d3.scaleLinear()
+              .domain([24, 0])
+              .range([usableArea.bottom, usableArea.top]);
+
+let xAxis, yAxis;
+$: {
+	d3.select(xAxis).call(d3.axisBottom(xScale));
+	d3.select(yAxis).call(d3.axisLeft(yScale).tickFormat(d => String(d % 24).padStart(2, "0") + ":00"));
+}
+
+let yAxisGridlines;
+
+$: {
+	d3.select(yAxisGridlines).call(
+		d3.axisLeft(yScale)
+		  .tickFormat("")
+		  .tickSize(-usableArea.width)
+	);
+}
+
+
+
 
 </script>
 
@@ -62,5 +106,32 @@ $: barData = d3.rollups(locData, v => v.length, d => d.type)
 </svelte:head>
 <h1>Meta</h1>
 <p>Meta page to visualize project data</p>
-{JSON.stringify(commits, null, "\t")}
+<h3>Commits by time of day</h3>
+<svg viewBox="0 0 {width} {height}">
+    <g transform="translate(0, {usableArea.bottom})" bind:this={xAxis} />
+    <g transform="translate({usableArea.left}, 0)" bind:this={yAxis} />
+    <g class="gridlines" transform="translate({usableArea.left}, 0)" bind:this={yAxisGridlines} />
+	<g class="dots">
+    {#each commits as commit, index }
+        <circle
+            cx={ xScale(commit.datetime) }
+            cy={ yScale(commit.hourFrac) }
+            r="5"
+            fill="steelblue"
+        />
+    {/each}
+    </g>
+
+</svg>
+
 <BarHorizontal data={barData}/>
+
+<style>
+	svg {
+		overflow: visible;
+	}
+    .gridlines {
+        stroke-opacity: .2;
+    }
+
+</style>
