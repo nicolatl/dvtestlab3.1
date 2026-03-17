@@ -43,7 +43,7 @@ onMount(async () => {
         let {author, date, time, timezone, datetime} = first;
         let ret = {
             id: commit,
-            url: "https://github.com/vis-society/lab-7/commit/" + commit,
+            url: "https://github.com/nicolatl/dvtestlab3.1/commit/" + commit,
             author, date, time, timezone, datetime,
             hourFrac: datetime.getHours() + datetime.getMinutes() / 60,
             totalLines: lines.length,
@@ -54,6 +54,7 @@ onMount(async () => {
         return ret;
     });
     commits = d3.sort(commits, d => -d.totalLines);
+    console.log(commits);
 
 
     barData = d3.rollups(locData, v => v.length, d => d.type)
@@ -73,8 +74,6 @@ $: barData = allTypes.map(type =>  ({ label: type, value: selectedCounts.get(typ
 // $: barData = d3.rollups(locData, v => v.length, d => d.type)
 //     .map(([type, count]) => ({ label: String(type), value: count }));
 
-// $: console.log(languageBreakdown);
-$: console.log(barData);
 
 // Thanks to Nathanael Jenkins for flagging this to us!
 // $: minDate = d3.min(commits.map(d => d.date));
@@ -144,7 +143,6 @@ async function dotInteraction (index, evt) {
                 // Remove the commit from the array
                 clickedCommits = clickedCommits.filter(c => c !== commit);
         }
-        console.log(clickedCommits);
     }
     
 }
