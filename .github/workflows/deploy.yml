@@ -23,6 +23,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Configure git
+        run: |
+          git config --global user.email "77587217+nicolatl@users.noreply.github.com"
+          git config --global user.name "nicolatl"
+
       - name: Generate loc.csv
         run: npx elocuent -d "static,src" -o static/loc.csv
 
