@@ -35,6 +35,7 @@ onMount(async () => {
         date: new Date(row.date + "T00:00" + row.timezone),
         datetime: new Date(row.datetime)
     }));
+    console.log(locData);
     
     //lab 7 insertions are here
     commits = d3.groups(locData, d => d.commit);
