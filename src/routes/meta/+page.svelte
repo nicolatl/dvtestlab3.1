@@ -3,6 +3,12 @@
 import { onMount } from 'svelte';
 import * as d3 from 'd3';
     import BarHorizontal from '../../lib/BarHorizontal.svelte';
+import {
+	computePosition,
+	autoPlacement,
+	offset,
+} from '@floating-ui/dom';
+
 
 let locData = [];
 let barData = [];
@@ -54,20 +60,20 @@ onMount(async () => {
 
         return ret;
     });
-    console.log(commits);
+    commits = d3.sort(commits, d => -d.totalLines);
 
 
     barData = d3.rollups(locData, v => v.length, d => d.type)
     .map(([type, count]) => ({ label: String(type), value: count }));
-    console.log(barData);
 });
 
 $: barData = d3.rollups(locData, v => v.length, d => d.type)
     .map(([type, count]) => ({ label: String(type), value: count }));
 
 // Thanks to Nathanael Jenkins for flagging this to us!
-$: minDate = d3.min(commits.map(d => d.date));
-$: maxDate = d3.max(commits.map(d => d.date));
+// $: minDate = d3.min(commits.map(d => d.date));
+// $: maxDate = d3.max(commits.map(d => d.date));
+$: [minDate, maxDate] = d3.extent(commits.map(d => d.date));
 $: maxDatePlusOne = new Date(maxDate);
 $: maxDatePlusOne.setDate(maxDatePlusOne.getDate() + 1);
 
@@ -79,6 +85,9 @@ $: xScale = d3.scaleTime()
 $: yScale = d3.scaleLinear()
               .domain([24, 0])
               .range([usableArea.bottom, usableArea.top]);
+$: rScale = d3.scaleSqrt()
+              .domain(d3.extent(commits.map(d => d.totalLines)))
+              .range([5,30]);
 
 let xAxis, yAxis;
 $: {
@@ -95,6 +104,46 @@ $: {
 		  .tickSize(-usableArea.width)
 	);
 }
+
+let hoveredIndex = -1;
+$: hoveredCommit = commits[hoveredIndex] ?? hoveredCommit ?? {};
+
+let cursor = {x: 0, y: 0};
+
+let commitTooltip;
+
+let tooltipPosition = {x: 0, y: 0};
+async function dotInteraction (index, evt) {
+	let hoveredDot = evt.target;
+	if (evt.type === "mouseenter") {
+		hoveredIndex = index;
+		cursor = {x: evt.x, y: evt.y};
+		tooltipPosition = await computePosition(hoveredDot, commitTooltip, {
+			strategy: "fixed", // because we use position: fixed
+			middleware: [
+				offset(5), // spacing from tooltip to dot
+				autoPlacement() // see https://floating-ui.com/docs/autoplacement
+			],
+		});        }
+	else if (evt.type === "mouseleave") {
+		hoveredIndex = -1
+	}
+    else if (evt.type === "click") {
+        let commit = commits[index]
+        if (!clickedCommits.includes(commit)) {
+            // Add the commit to the clickedCommits array
+            clickedCommits = [...clickedCommits, commit];
+        }
+        else {
+                // Remove the commit from the array
+                clickedCommits = clickedCommits.filter(c => c !== commit);
+        }
+        console.log(clickedCommits);
+    }
+    
+}
+
+let clickedCommits = [];
 
 
 
@@ -113,16 +162,38 @@ $: {
     <g class="gridlines" transform="translate({usableArea.left}, 0)" bind:this={yAxisGridlines} />
 	<g class="dots">
     {#each commits as commit, index }
-        <circle
+        <circle      
+            class:selected={ clickedCommits.includes(commit) }     
+            on:mouseenter={evt => dotInteraction(index, evt)}
+            on:mouseleave={evt => dotInteraction(index, evt)}
+            on:click={ evt => dotInteraction(index, evt) }
             cx={ xScale(commit.datetime) }
             cy={ yScale(commit.hourFrac) }
-            r="5"
+            r={ rScale(commit.totalLines) }
             fill="steelblue"
         />
     {/each}
     </g>
 
 </svg>
+
+<dl class="info tooltip" hidden={hoveredIndex === -1} style="top: {tooltipPosition.y}px; left: {tooltipPosition.x}px" bind:this={commitTooltip}>
+	<dt>Commit</dt>
+	<dd><a href="{ hoveredCommit.url }" target="_blank">{ hoveredCommit.id }</a></dd>
+    
+	<dt>Author</dt>
+	<dd>{ hoveredCommit.author }</dd>
+
+	<dt>Date</dt>
+	<dd>{ hoveredCommit.datetime?.toLocaleString("en", {dateStyle: "full"}) }</dd>
+
+    <dt>Time</dt>
+	<dd>{ hoveredCommit.datetime?.toLocaleString("en", {timeStyle: "short"}) }</dd>
+
+	<dt>Lines</dt>
+	<dd>{ hoveredCommit.totalLines }</dd>
+</dl>
+
 
 <BarHorizontal data={barData}/>
 
@@ -132,6 +203,46 @@ $: {
 	}
     .gridlines {
         stroke-opacity: .2;
+    }
+    circle {
+        fill-opacity: .7;
+        transition: 200ms;
+        &:hover {
+		    fill:darkgreen;
+	    }
+    }
+    dl.info {
+        display: grid;
+        font-size:smaller;
+        transition-duration: 500ms;
+        transition-property: opacity, visibility;
+
+        &[hidden]:not(:hover, :focus-within) {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+    
+    dt {
+        grid-column: 1;
+        color:grey;
+    }
+    dd {
+        grid-column: 2;
+        margin-left: 12px;
+    }
+    .tooltip {
+        position: fixed;
+        top:1em;
+        left:1em;
+        background-color: oklch(100% 0% 0 / 80%);
+        box-shadow: 1px 1px 6px 1px lightgrey;
+        border-radius: 4px;
+        backdrop-filter: blur(10px);
+        padding: 4px;
+    }
+    .selected {
+        fill: var(--color-accent);
     }
 
 </style>
