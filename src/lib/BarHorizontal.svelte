@@ -5,6 +5,7 @@
     let height = 300;
 
     export let data = [];
+    export let title = "";
 
 
 
@@ -42,7 +43,7 @@
         y={margin.top / 2}
         text-anchor="middle"
         class="chart-title">
-        Website Breakdown: Lines of Code
+        {title}
     </text>
     <!-- x-axis label -->
     <text

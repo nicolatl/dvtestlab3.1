@@ -46,17 +46,10 @@ onMount(async () => {
             url: "https://github.com/vis-society/lab-7/commit/" + commit,
             author, date, time, timezone, datetime,
             hourFrac: datetime.getHours() + datetime.getMinutes() / 60,
-            totalLines: lines.length
+            totalLines: lines.length,
+            lines: lines
         };
 
-        // Like ret.lines = lines
-        // but non-enumerable so it doesn’t show up in JSON.stringify
-        Object.defineProperty(ret, "lines", {
-            value: lines,
-            configurable: true,
-            writable: true,
-            enumerable: false,
-        });
 
         return ret;
     });
@@ -67,8 +60,21 @@ onMount(async () => {
     .map(([type, count]) => ({ label: String(type), value: count }));
 });
 
-$: barData = d3.rollups(locData, v => v.length, d => d.type)
-    .map(([type, count]) => ({ label: String(type), value: count }));
+$: selectedLines = (clickedCommits.length > 0 ? clickedCommits.flatMap(d => d.lines) : locData);
+$: selectedCounts = d3.rollup(
+    selectedLines,
+    v => v.length,
+    d => d.type
+);
+$: allTypes = Array.from(new Set(locData.map(d => d.type)));
+$: barData = allTypes.map(type =>  ({ label: type, value: selectedCounts.get(type) || 0 }));
+
+
+// $: barData = d3.rollups(locData, v => v.length, d => d.type)
+//     .map(([type, count]) => ({ label: String(type), value: count }));
+
+// $: console.log(languageBreakdown);
+$: console.log(barData);
 
 // Thanks to Nathanael Jenkins for flagging this to us!
 // $: minDate = d3.min(commits.map(d => d.date));
@@ -195,7 +201,7 @@ let clickedCommits = [];
 </dl>
 
 
-<BarHorizontal data={barData}/>
+<BarHorizontal data={barData} title={clickedCommits.length > 0 ? "Lines of Code: Selected commits" : "Lines of Code: Website Breakdown"}/>
 
 <style>
 	svg {
