@@ -161,7 +161,7 @@ let clickedCommits = [];
 </svelte:head>
 <h1>Meta</h1>
 <p>Meta page to visualize project data</p>
-<h3>Commits by time of day</h3>
+<h2>Commits by time of day</h2>
 <svg viewBox="0 0 {width} {height}">
     <g transform="translate(0, {usableArea.bottom})" bind:this={xAxis} />
     <g transform="translate({usableArea.left}, 0)" bind:this={yAxis} />
@@ -249,6 +249,10 @@ let clickedCommits = [];
     }
     .selected {
         fill: var(--color-accent);
+    }
+
+    h2 {
+        text-align: center;
     }
 
 </style>

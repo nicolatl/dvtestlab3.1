@@ -2,14 +2,14 @@
     import * as d3 from 'd3';
 
     let width = 400;
-    let height = 300;
+    let height = 100;
 
     export let data = [];
     export let title = "";
 
 
 
-    let margin = { top: 20, right: 20, bottom: 30, left: 60 };
+    let margin = { top: 20, right: 60, bottom: 30, left: 60 };
     let innerWidth  = width  - margin.left - margin.right;
     let innerHeight = height - margin.top  - margin.bottom;
 
@@ -28,7 +28,10 @@
     let xAxis, yAxis;
 
     $: if (xAxis && yAxis) {
-        d3.select(xAxis).call(d3.axisBottom(xScale));
+        d3.select(xAxis).call(
+            d3.axisBottom(xScale)
+            .ticks(Math.min(d3.max(data, d => d.value), 10))
+        );
         d3.select(yAxis).call(d3.axisLeft(yScale));
     }
 
@@ -48,7 +51,7 @@
     <!-- x-axis label -->
     <text
         x={margin.left + innerWidth / 2}
-        y={innerHeight + margin.bottom + 30}
+        y={innerHeight + margin.bottom + 20}
         text-anchor="middle"
         class="axis-label">
         Lines of Code
@@ -61,7 +64,8 @@
         text-anchor="middle"
         transform="rotate(-90)"
         class="axis-label">
-        Programming Language
+        <tspan>Programming</tspan>
+        <tspan x={-margin.top - (innerHeight / 2)} dy=1em>Language</tspan>
     </text>
 
     <g transform="translate({margin.left}, {margin.top + innerHeight})"
@@ -90,20 +94,20 @@
                 stroke-width="2"
             />
             <!-- leader line -->
-            <line
+            <!-- <line
                 x1={xScale(maxBar.value) / 2}
                 y1={yScale(maxBar.label)}
                 x2={xScale(maxBar.value) / 2}
                 y2={yScale(maxBar.label)-30}
                 stroke="currentColor"
                 stroke-width="1"
-            />
+            /> -->
             <!-- annotation text at end of leader line -->
             <text
-                y={yScale(maxBar.label)-40}
-                x={xScale(maxBar.value) / 2}
+                x={xScale(maxBar.value) + 6}
+                y={yScale(maxBar.label) + yScale.bandwidth() / 2}
                 dominant-baseline="middle"
-                text-anchor="middle"
+                text-anchor="start"
                 class="annotation">
                 Most lines of code
             </text>
@@ -144,12 +148,15 @@
         gap:4px;
     }
     .chart-title {
-        font-size: 1em;
+        font-size: 0.6em;
         font-weight: bold;
         fill: currentColor;
     }
+    .axis-label {
+        font-size: 0.5em;
+    }
     .annotation {
-        font-size: 0.7em;
+        font-size: 0.5em;
         fill: black;
         font-style: italic;
     }
